@@ -1,6 +1,6 @@
 // X Y Position Array
-var Xpos = [124, 162, 200, 238, 276];
-var Ypos = [60, 143, 226];
+var X_POSITION = [124, 162, 200, 238, 276];
+var Y_POSITION = [60, 143, 226];
 
 // Enemies our players must avoid 
 
@@ -8,7 +8,7 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
     this.x = -100;
     // Randomize which line bug appears on.
-    this.y = Ypos[Math.floor(Math.random() * 3)];
+    this.y = Y_POSITION[Math.floor(Math.random() * 3)];
     // Randomize bug speed
     this.speed = Math.floor(Math.random() * 91 + 10);
 };
@@ -22,14 +22,12 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 500) {
         this.x = -100;
         // Randomize which line bug appears on.
-        this.y = Ypos[Math.floor(Math.random() * 3)];
+        this.y = Y_POSITION[Math.floor(Math.random() * 3)];
     }
     // Parameters for collision detection.
     var x1 = this.x - 80;
-    var x2 = this.x + 81;
-    // Personally don't approve of this way but it's required by Udacity's style guide.
-    if (player.x > x1 && player.x < x2 && player.y - 8 === this.y) {
-        // Got ate by bug.
+    var x2 = this.x + 81;    
+    if (player.x > x1 && player.x < x2 && player.y - 8 === this.y) {        
         player.reset();
     }
 };
@@ -76,18 +74,18 @@ Player.prototype.handleInput = function(e) {
 
 // Reset player to starting position.
 Player.prototype.reset = function() {
-    player.x = 200;
-    player.y = 400;
+    this.x = 200;
+    this.y = 400;
 };
 
 //Now instantiate your objects
 var allEnemies = [];
 var enemy = new Enemy();
-for (i=0; i<=4; i++) {
+for (i = 0; i <= 4; i++) {
     enemy = new Enemy();
     allEnemies[i] = new Enemy();
     allEnemies.push(enemy);
-};
+}
 
 var player = new Player();
 
